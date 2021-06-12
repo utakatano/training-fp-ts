@@ -1,4 +1,5 @@
 import './style.css'
+import './fp-ts/Option'
 
 const app = document.querySelector<HTMLDivElement>('#app')!
 
