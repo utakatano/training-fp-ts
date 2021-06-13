@@ -15,6 +15,8 @@ import {
 
 const isEven = (n: number) => n % 2 === 0
 
+console.info('// Option')
+
 // Option - none, some, fromNullable, and fromPredicate
 console.log(none)
 console.log(some(1))
