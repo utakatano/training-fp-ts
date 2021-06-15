@@ -8,6 +8,8 @@ import {
   flatten,
   getOrElse,
   orElse,
+  fold,
+  exists,
   fromNullable,
   fromPredicate
 } from 'fp-ts/es6/Either'
@@ -56,3 +58,20 @@ console.log(getOrElseFunc(right(1)))
 const orElseFunc = orElse(() => right(1))
 console.log(orElseFunc(left(0)))
 console.log(orElseFunc(right(2)))
+
+// Either - fold
+const foldFunc = fold(
+  (n: number) => `left: ${n}`,
+  (n: number) => `right: ${n}`
+)
+
+console.log(foldFunc(left(0)))
+console.log(foldFunc(right(1)))
+
+// Either - exists
+const existsFunc = exists((n: number) => n % 2 === 0)
+
+console.log(existsFunc(left(1)))
+console.log(existsFunc(left(2)))
+console.log(existsFunc(right(1)))
+console.log(existsFunc(right(2)))
