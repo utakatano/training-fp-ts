@@ -1,6 +1,7 @@
 import './style.css'
 import './fp-ts/Option'
 import './fp-ts/Either'
+import './fp-ts/Array'
 
 const app = document.querySelector<HTMLDivElement>('#app')!
 
