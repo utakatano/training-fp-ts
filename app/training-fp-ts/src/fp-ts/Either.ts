@@ -10,6 +10,7 @@ import {
   orElse,
   fold,
   exists,
+  tryCatch,
   fromNullable,
   fromPredicate
 } from 'fp-ts/es6/Either'
@@ -75,3 +76,9 @@ console.log(existsFunc(left(1)))
 console.log(existsFunc(left(2)))
 console.log(existsFunc(right(1)))
 console.log(existsFunc(right(2)))
+
+// Either - tryCatch
+const tryCatchFunc = (s: string) => tryCatch(() => JSON.parse(s), (e) => `${e}`)
+
+console.log(tryCatchFunc('{ "msg": "Hello, world!" }'))
+console.log(tryCatchFunc('('))
