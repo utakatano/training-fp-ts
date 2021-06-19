@@ -15,8 +15,22 @@ import {
   range,
   replicate,
   head,
-  last
+  last,
+  tail,
+  lookup,
+  isEmpty,
+  isNonEmpty,
+  rotate,
+  reverse,
+  union,
+  uniq,
+  intersection,
+  difference
 } from 'fp-ts/es6/Array'
+
+import {
+  Eq
+} from 'fp-ts/es6/number'
 
 const cond = (n: number) => n < 3
 
@@ -73,3 +87,45 @@ console.log(replicate(3, 'foobar'))
 console.log(head([1, 2, 3]))
 console.log(last([1, 2, 3]))
 console.log(head([]))
+
+// Array - tail
+console.log(tail([1, 2, 3]))
+console.log(tail([1]))
+console.log(tail([]))
+
+// Array - lookup
+console.log(lookup(1, [1, 2, 3]))
+console.log(lookup(4, [1, 2, 3]))
+
+// Array - isEmpty / isNonEmpty
+const a = [1, 2, 3]
+console.log(isEmpty([]))
+console.log(isEmpty(a))
+console.log(isNonEmpty([]))
+console.log(isNonEmpty(a))
+
+// if (isNonEmpty(a)) {
+//   a
+// }
+
+// Array - rotate
+console.log(rotate(2)([1, 2, 3, 4, 5]))
+console.log(rotate(-2)([1, 2, 3, 4, 5]))
+
+// Array - reverse
+console.log(reverse([1, 2, 3]))
+
+// Array - union
+console.log(union(Eq)([1, 2], [2, 3]))
+
+// Array - uniq
+console.log(uniq(Eq)([1, 2, 2, 3]))
+
+// Array - intersection
+console.log(intersection(Eq)([1, 2, 2], [2, 3]))
+console.log(intersection(Eq)([1, 2], [2, 2, 3]))
+
+// Array - difference
+console.log(difference(Eq)([1, 2], [2, 3]))
+console.log(difference(Eq)([1, 1, 2], [2, 3]))
+console.log(difference(Eq)([1, 2], [1, 2, 3]))
