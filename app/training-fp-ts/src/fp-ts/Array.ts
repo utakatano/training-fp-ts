@@ -25,12 +25,23 @@ import {
   union,
   uniq,
   intersection,
-  difference
+  difference,
+  sort,
+  sortBy
 } from 'fp-ts/es6/Array'
 
 import {
-  Eq
+  Eq,
+  Ord as OrdNumber
 } from 'fp-ts/es6/number'
+
+import {
+  Ord as OrdString
+} from 'fp-ts/es6/string'
+
+import {
+  Contravariant,
+} from 'fp-ts/es6/Ord'
 
 const cond = (n: number) => n < 3
 
@@ -129,3 +140,27 @@ console.log(intersection(Eq)([1, 2], [2, 2, 3]))
 console.log(difference(Eq)([1, 2], [2, 3]))
 console.log(difference(Eq)([1, 1, 2], [2, 3]))
 console.log(difference(Eq)([1, 2], [1, 2, 3]))
+
+// Array - sort / sortBy
+console.log(sort(OrdNumber)([1, 5, 2, 4, 3]))
+
+interface User {
+  id: number
+  kind: string
+  name: string
+}
+
+const sortCond = ([
+  Contravariant.contramap(OrdString, (user: User) => user.kind),
+  Contravariant.contramap(OrdNumber, (user: User) => user.id)
+])
+
+const users: User[] = [
+  {id: 2, kind: 'A', name: 'tanaka'},
+  {id: 5, kind: 'A', name: 'suzuki'},
+  {id: 4, kind: 'B', name: 'yamada'},
+  {id: 3, kind: 'B', name: 'sakurai'},
+  {id: 1, kind: 'A', name: 'sato'}
+]
+
+console.log(sortBy(sortCond)(users))
