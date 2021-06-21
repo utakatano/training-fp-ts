@@ -27,8 +27,19 @@ import {
   intersection,
   difference,
   sort,
-  sortBy
+  sortBy,
+  filter,
+  filterWithIndex,
+  map,
+  mapWithIndex,
+  flatten,
+  compact
 } from 'fp-ts/es6/Array'
+
+import {
+  some,
+  none
+} from 'fp-ts/es6/Option'
 
 import {
   Eq,
@@ -164,3 +175,23 @@ const users: User[] = [
 ]
 
 console.log(sortBy(sortCond)(users))
+
+// Array - filter / filterWithIndex
+const filterFunc = filter((s: string) => s.startsWith('b'))
+const filterWithIndexFunc = filterWithIndex((i: number, s: string) => i >= 2 && s.startsWith('b'))
+
+console.log(filterFunc(['foo', 'bar', 'baz']))
+console.log(filterWithIndexFunc(['foo', 'bar', 'baz']))
+
+// Array - map / mapWithIndex
+const mapFunc = map((s: string) => ({ value: s }))
+const mapWithIndexFunc = mapWithIndex((i: number, s: string) => ({ index: i, value: s }))
+
+console.log(mapFunc(['foo', 'bar', 'baz']))
+console.log(mapWithIndexFunc(['foo', 'bar', 'baz']))
+
+// Array - flatten / compact
+console.log(flatten([[1], [2, 3], [], [4]]))
+console.log(compact([]))
+console.log(compact([some(1), some(2), some(3)]))
+console.log(compact([some(1), none, some(3)]))
