@@ -33,7 +33,11 @@ import {
   map,
   mapWithIndex,
   flatten,
-  compact
+  compact,
+  findFirst,
+  findIndex,
+  findLast,
+  findLastIndex
 } from 'fp-ts/es6/Array'
 
 import {
@@ -195,3 +199,21 @@ console.log(flatten([[1], [2, 3], [], [4]]))
 console.log(compact([]))
 console.log(compact([some(1), some(2), some(3)]))
 console.log(compact([some(1), none, some(3)]))
+
+// Array - findFirst / findIndex / findLast / findLastIndex
+const cond1 = (user: {id: number, name: string}) => user.name === 'tanaka'
+const cond2 = (user: {id: number, name: string}) => user.name === 'sato'
+
+const users1 = [
+  { id: 1, name: 'yamada' },
+  { id: 2, name: 'tanaka' },
+  { id: 3, name: 'sakurai' },
+  { id: 4, name: 'suzuki' },
+  { id: 5, name: 'tanaka' }
+]
+
+console.log(findFirst(cond1)(users1))
+console.log(findIndex(cond1)(users1))
+console.log(findLast(cond1)(users1))
+console.log(findLastIndex(cond1)(users1))
+console.log(findLast(cond2)(users1))
